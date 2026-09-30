@@ -8,7 +8,7 @@ Ce projet utilise l'intelligence artificielle (YOLOv8) pour détecter automatiqu
 **YOLO** (You Only Look Once) est un algorithme de détection d'objets très populaire. Contrairement aux anciennes méthodes qui analysent une image plusieurs fois, YOLO ne regarde l'image qu'une seule fois pour détecter tous les objets simultanément. C'est ce qui le rend très rapide !
 
 ### Pourquoi découper les orthophotos ?
-Les orthophotos THR (Très Haute Résolution, 5cm/pixel) sont des fichiers gigantesques (plusieurs Go) avec des milliers de pixels de côté. YOLO ne peut pas traiter une image aussi grande en une seule fois. Il faut donc :
+Les orthophotos du PCRS (Très Haute Résolution, 5cm/pixel) sont des fichiers gigantesques (plusieurs Go) avec des milliers de pixels de côté. YOLO ne peut pas traiter une image aussi grande en une seule fois. Il faut donc :
 1. **Découper** l'orthophoto en petits morceaux (tuiles) de 640x640 pixels
 2. **Analyser** chaque tuile avec YOLO
 3. **Recomposer** les résultats en coordonnées géographiques réelles

@@ -1,0 +1,361 @@
+<VRTDataset rasterXSize="80000" rasterYSize="60000">
+  <SRS dataAxisToSRSAxisMapping="1,2">PROJCS["ETRS89-FRA [RGF93 v1] / Lambert-93",GEOGCS["ETRS89-FRA [RGF93 v1]",DATUM["Reseau_Geodesique_Francais_1993_v1",SPHEROID["GRS 1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6171"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4171"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["latitude_of_origin",46.5],PARAMETER["central_meridian",3],PARAMETER["standard_parallel_1",49],PARAMETER["standard_parallel_2",44],PARAMETER["false_easting",700000],PARAMETER["false_northing",6600000],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AXIS["Easting",EAST],AXIS["Northing",NORTH],AUTHORITY["EPSG","2154"]]</SRS>
+  <GeoTransform>  3.6100000000000000e+05,  5.0000000000000003e-02,  0.0000000000000000e+00,  6.8710000000000000e+06,  0.0000000000000000e+00, -5.0000000000000003e-02</GeoTransform>
+  <VRTRasterBand dataType="Byte" band="1">
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+    </Metadata>
+    <ColorInterp>Red</ColorInterp>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="2">
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+    </Metadata>
+    <ColorInterp>Green</ColorInterp>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>2</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="3">
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">255</MDI>
+    </Metadata>
+    <ColorInterp>Blue</ColorInterp>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>3</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="4">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0361_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0362_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="20000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0363_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="40000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6869_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="40000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6870_ORTHO_20230904_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="20000" xSize="20000" ySize="20000" />
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">pcrs/ROLNHDF_FRA_0364_6871_ORTHO_20230930_RGF93-L93_IGN69.tif</SourceFilename>
+      <SourceBand>4</SourceBand>
+      <SourceProperties RasterXSize="20000" RasterYSize="20000" DataType="Byte" BlockXSize="20000" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="20000" ySize="20000" />
+      <DstRect xOff="60000" yOff="0" xSize="20000" ySize="20000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <OverviewList resampling="nearest">2 4 8 16 32</OverviewList>
+</VRTDataset>

@@ -1,6 +1,6 @@
 # Projet de Détection de Passages Piétons avec YOLO
 
-Ce projet utilise l'intelligence artificielle YOLOv8 et YOLO26 de https://github.com/ultralytics/ultralytics pour détecter automatiquement des passages piétons et du mobilier urbain sur des orthophotos (photos aériennes haute résolution).
+Ce projet utilise l'intelligence artificielle YOLOv8 et YOLO26 de https://github.com/ultralytics/ultralytics pour détecter automatiquement des passages piétons sur des orthophotos (photos aériennes haute résolution).
 
 ## 📚 Vue d'ensemble pour débutants
 

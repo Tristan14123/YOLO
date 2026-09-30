@@ -2,6 +2,8 @@
 
 Ce projet utilise l'intelligence artificielle YOLOv8 et YOLO26 de https://github.com/ultralytics/ultralytics pour détecter automatiquement des passages piétons sur des orthophotos (photos aériennes haute résolution).
 
+Less orthophotos utilisés sont les photos aériennes du PCRS de 2023 fournis par la collectivité.
+
 ## 📚 Vue d'ensemble pour débutants
 
 ### Qu'est-ce que YOLO ?

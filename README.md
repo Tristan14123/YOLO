@@ -1,249 +1,296 @@
-# Projet de Détection de Passages Piétons avec YOLO
+# Pedestrian Crossing Detection Project with YOLO
 
-Ce projet utilise l'intelligence artificielle YOLOv8 et YOLO26 de https://github.com/ultralytics/ultralytics pour détecter automatiquement des passages piétons sur des orthophotos (photos aériennes haute résolution).
+This project uses the YOLOv8 and YOLO26 artificial intelligence models from https://github.com/ultralytics/ultralytics to automatically detect pedestrian crossings in orthophotos (high-resolution aerial imagery).
 
-Less orthophotos utilisés sont les photos aériennes du PCRS de 2023 fournis par la collectivité.
+The orthophotos used are 2023 PCRS aerial photographs provided by the local authority.
 
-## 📚 Vue d'ensemble pour débutants
+## 📚 Overview for Beginners
 
-### Qu'est-ce que YOLO ?
-**YOLO** (You Only Look Once) est un algorithme de détection d'objets très populaire. Contrairement aux anciennes méthodes qui analysent une image plusieurs fois, YOLO ne regarde l'image qu'une seule fois pour détecter tous les objets simultanément. C'est ce qui le rend très rapide !
+### What is YOLO?
 
-### Pourquoi découper les orthophotos ?
-Les orthophotos du PCRS (Très Haute Résolution, 5cm/pixel) sont des fichiers gigantesques (plusieurs Go) avec des milliers de pixels de côté. YOLO ne peut pas traiter une image aussi grande en une seule fois. Il faut donc :
-1. **Découper** l'orthophoto en petits morceaux (tuiles) de 640x640 pixels
-2. **Analyser** chaque tuile avec YOLO
-3. **Recomposer** les résultats en coordonnées géographiques réelles
+**YOLO** (You Only Look Once) is a very popular object detection algorithm. Unlike older methods that analyze an image multiple times, YOLO looks at the image only once to detect all objects simultaneously. This is what makes it so fast!
+
+### Why split orthophotos?
+
+PCRS orthophotos (Very High Resolution, 5 cm/pixel) are huge files (several GB) with thousands of pixels on each side. YOLO cannot process such a large image all at once. Therefore, it is necessary to:
+
+1. **Split** the orthophoto into small pieces (tiles) of 640x640 pixels
+2. **Analyze** each tile with YOLO
+3. **Reconstruct** the results using real-world geographic coordinates
 
 ---
 
-## 🛠️ Les Scripts Python
+## 🛠️ Python Scripts
 
-### 1. `prepa_dataset.py` - Préparation du Dataset
+### 1. `prepa_dataset.py` — Dataset Preparation
 
-**But :** Préparer les données d'entraînement pour YOLO à partir d'orthophotos et d'annotations faites dans QGIS.
+**Purpose:** Prepare training data for YOLO from orthophotos and annotations created in QGIS.
 
-#### Qu'est-ce qu'un dataset d'entraînement ?
-Pour qu'une IA apprenne à reconnaître des passages piétons, il faut lui montrer des exemples. Un dataset contient :
-- **Images** : des morceaux d'orthophoto (tuiles)
-- **Labels** : des fichiers texte qui indiquent où se trouvent les passages piétons sur chaque image
-- **Split train/val** : 
-  - `train` (80%) : pour enseigner à l'IA
-  - `val` (20%) : pour tester si l'IA a bien appris
+#### What is a training dataset?
 
-#### Workflow complet :
+For an AI model to learn how to recognize pedestrian crossings, it needs to be shown examples. A dataset contains:
 
-##### Étape 1 : Digitalisation dans QGIS
-1. Charger l'orthophoto dans QGIS
-2. Créer une couche vecteur (GeoPackage) avec un champ `classe`
-3. Dessiner manuellement :
-   - **passage_pieton** → comme un POLYGONE autour du passage
-   - **mobilier_urbain** → comme un POINT sur l'objet
+* **Images**: pieces of orthophotos (tiles)
+* **Labels**: text files indicating where pedestrian crossings are located in each image
+* **Train/val split**:
 
-##### Étape 2 : Construction du dataset
+  * `train` (80%): used to teach the AI
+  * `val` (20%): used to test whether the AI has learned correctly
+
+#### Complete workflow:
+
+##### Step 1: Digitizing in QGIS
+
+1. Load the orthophoto in QGIS
+2. Create a vector layer (GeoPackage) with a `classe` field
+3. Manually draw:
+
+   * **passage_pieton** → as a POLYGON around the pedestrian crossing
+   * **mobilier_urbain** → as a POINT on the object
+
+##### Step 2: Building the dataset
+
 ```bash
 python prepa_dataset.py build --ortho pcrs_tout.vrt --annotations passage.gpkg --out dataset
 ```
 
-voir passage.gpkg pour les zone d'entrainement du model.
+See `passage.gpkg` for the model training areas.
 
-**Ce que fait le script :**
-1. **Liste les dalles** : Il accepte un GeoTIFF, un VRT (mosaïque virtuelle) ou un dossier de dalles
-2. **Planifie intelligemment** : Il ne lit que les dalles qui contiennent des annotations (gain de temps !)
-3. **Découpe en tuiles** : Il découpe chaque dalle en tuiles de 640x640 pixels
-4. **Convertit les annotations** : Il transforme les coordonnées géographiques QGIS en coordonnées pixels YOLO
-5. **Sélectionne les tuiles utiles** :
-   - Garde **toutes** les tuiles avec des passages piétons (positives)
-   - Ajoute un **échantillon** de tuiles vides (négatives) pour apprendre à ne pas détecter partout
-6. **Split spatial intelligent** : Il évite que deux tuiles voisines du même passage se retrouvent l'une en train, l'autre en validation
-7. **Crée les fichiers** :
-   - `dataset/images/train/*.jpg` - Images d'entraînement
-   - `dataset/images/val/*.jpg` - Images de validation
-   - `dataset/labels/train/*.txt` - Labels d'entraînement
-   - `dataset/labels/val/*.txt` - Labels de validation
-   - `dataset/data.yaml` - Fichier de configuration YOLO
-   - `dataset/manifest.csv` - Inventaire de toutes les tuiles
+**What the script does:**
 
-**⚠️ Important :** Dans chaque dalle utilisée, annote TOUS les passages piétons visibles. Les tuiles "vides" servent d'exemples négatifs - un passage non annoté serait appris comme "ce n'est pas un passage" !
+1. **Lists the tiles**: It accepts a GeoTIFF, a VRT (virtual mosaic), or a tile directory
+2. **Plans intelligently**: It only reads tiles containing annotations (saving processing time!)
+3. **Splits into tiles**: It divides each tile into 640x640 pixel tiles
+4. **Converts annotations**: It converts QGIS geographic coordinates into YOLO pixel coordinates
+5. **Selects useful tiles**:
 
-#### Arguments utiles :
-- `--tile-size` : Taille des tuiles (défaut : 640)
-- `--val-ratio` : Proportion de validation (défaut : 0.2 = 20%)
-- `--neg-ratio` : Tuiles vides par tuile positive (défaut : 1.0)
-- `--force` : Efface et recrée le dataset s'il existe déjà
+   * Keeps **all** tiles containing pedestrian crossings (positive samples)
+   * Adds a **sample** of empty tiles (negative samples) so the model learns not to detect objects everywhere
+6. **Intelligent spatial split**: It prevents neighboring tiles belonging to the same crossing from being split between training and validation
+7. **Creates the following files**:
+
+   * `dataset/images/train/*.jpg` — Training images
+   * `dataset/images/val/*.jpg` — Validation images
+   * `dataset/labels/train/*.txt` — Training labels
+   * `dataset/labels/val/*.txt` — Validation labels
+   * `dataset/data.yaml` — YOLO configuration file
+   * `dataset/manifest.csv` — Inventory of all tiles
+
+**⚠️ Important:** In every tile used, annotate ALL visible pedestrian crossings. The "empty" tiles are used as negative examples — an unannotated pedestrian crossing would be learned as "this is not a pedestrian crossing"!
+
+#### Useful arguments:
+
+* `--tile-size`: Tile size (default: 640)
+* `--val-ratio`: Validation proportion (default: 0.2 = 20%)
+* `--neg-ratio`: Empty tiles per positive tile (default: 1.0)
+* `--force`: Deletes and recreates the dataset if it already exists
 
 ---
 
-### 2. `yolo_detection.py` - Détection et Entraînement
+### 2. `yolo_detection.py` — Detection and Training
 
-**But :** Script principal qui fait deux choses :
-1. **Entraîner** un modèle YOLO sur vos annotations
-2. **Appliquer** un modèle entraîné sur de nouvelles orthophotos
+**Purpose:** Main script that does two things:
 
-#### Mode 1 : Entraînement
+1. Train a YOLO model using your annotations
+2. Apply a trained model to new orthophotos
+
+#### Mode 1: Training
 
 ```bash
 python yolo_detection.py train --data dataset/data.yaml --epochs 100 --imgsz 640 --base-model yolov8s.pt
 ```
 
-**Ce que fait le script :**
-1. **Charge un modèle pré-entraîné** : `yolov8s.pt` est un modèle qui a déjà appris sur 80 classes d'objets (COCO dataset)
-2. **Transfer learning** : Il adapte ce modèle à vos 2 classes (passage_pieton, mobilier_urbain)
-3. **Entraîne pendant 100 epochs** : Une "epoch" = un passage complet sur toutes les images d'entraînement
-4. **Utilise l'accélération matérielle** :
-   - `cuda` sur Windows/Linux avec carte NVIDIA
-   - `mps` sur Mac Apple Silicon (M1/M2/M3)
-   - `cpu` en dernier recours (plus lent)
-5. **Augmentation des données** : `flipud=0.5` retourne verticalement 50% des images (utile en vue aérienne)
-6. **Sauvegarde les meilleurs poids** : Dans `runs/detect/train/weights/best.pt`
+**What the script does:**
 
-**Arguments utiles :**
-- `--epochs` : Nombre de passages (défaut : 100)
-- `--imgsz` : Taille des images (défaut : 640)
-- `--base-model` : Modèle de départ (yolov8n.pt, yolov8s.pt, yolov8m.pt, yolov8l.pt)
-- `--batch` : Nombre d'images traitées en parallèle (défaut : 16)
+1. **Loads a pre-trained model**: `yolov8s.pt` is a model that has already learned 80 object classes from the COCO dataset
+2. **Transfer learning**: It adapts this model to your 2 classes (`passage_pieton`, `mobilier_urbain`)
+3. **Trains for 100 epochs**: An "epoch" is one complete pass through all training images
+4. **Uses hardware acceleration**:
 
-#### Mode 2 : Inférence (Détection)
+   * `cuda` on Windows/Linux with an NVIDIA graphics card
+   * `mps` on Mac Apple Silicon (M1/M2/M3)
+   * `cpu` as a last resort (slower)
+5. **Data augmentation**: `flipud=0.5` vertically flips 50% of the images (useful for aerial imagery)
+6. **Saves the best weights**: In `runs/detect/train/weights/best.pt`
+
+#### Useful arguments:
+
+* `--epochs`: Number of training passes (default: 100)
+* `--imgsz`: Image size (default: 640)
+* `--base-model`: Starting model (`yolov8n.pt`, `yolov8s.pt`, `yolov8m.pt`, `yolov8l.pt`)
+* `--batch`: Number of images processed simultaneously (default: 16)
+
+#### Mode 2: Inference (Detection)
 
 ```bash
 python yolo_detection.py infer --ortho ortho.tif --weights runs/detect/train/weights/best.pt --out detections.gpkg
 ```
 
-**Ce que fait le script :**
-1. **Charge le modèle entraîné** : Les poids `.pt` contiennent ce que le modèle a appris
-2. **Découpe l'orthophoto en tuiles** : Avec chevauchement (overlap) pour ne pas couper les objets au bord
-3. **Lance la détection** sur chaque tuile
-4. **Reprojette en coordonnées terrain** : Convertit les pixels en mètres/coordonnées géographiques
-5. **Fusionne les doublons** : Si un passage est détecté dans plusieurs tuiles, il ne le garde qu'une fois
-6. **Exporte en GeoPackage** : Un fichier SIG chargeable dans QGIS
+**What the script does:**
 
-**Arguments utiles :**
-- `--tile-size` : Taille des tuiles (défaut : 640)
-- `--overlap` : Chevauchement en pixels (défaut : 64)
-- `--conf` : Seuil de confiance (défaut : 0.35 = 35%)
-- `--epsg` : Code CRS si absent du fichier (défaut : 2154 = Lambert-93)
+1. **Loads the trained model**: The `.pt` weights contain what the model has learned
+2. **Splits the orthophoto into tiles**: With overlap to prevent objects from being cut off at tile boundaries
+3. **Runs detection** on each tile
+4. **Reprojects the results into real-world coordinates**: Converts pixels into meters/geographic coordinates
+5. **Merges duplicates**: If a crossing is detected in several tiles, it is kept only once
+6. **Exports to GeoPackage**: A GIS file that can be loaded into QGIS
 
-#### Pourquoi le chevauchement (overlap) ?
-Sans chevauchement, un passage piéton coupé exactement entre deux tuiles pourrait être :
-- Détecté partiellement dans la tuile de gauche
-- Détecté partiellement dans la tuile de droite
-- Mais jamais détecté complètement !
+#### Useful arguments:
 
-Avec 64 pixels de chevauchement, chaque objet a plus de chances d'être entièrement contenu dans au moins une tuile.
+* `--tile-size`: Tile size (default: 640)
+* `--overlap`: Overlap in pixels (default: 64)
+* `--conf`: Confidence threshold (default: 0.35 = 35%)
+* `--epsg`: CRS code if missing from the file (default: 2154 = Lambert-93)
+
+### Why use overlap?
+
+Without overlap, a pedestrian crossing located exactly between two tiles could be:
+
+* Partially detected in the left tile
+* Partially detected in the right tile
+* But never detected completely!
+
+With a 64-pixel overlap, each object is more likely to be fully contained within at least one tile.
 
 ---
 
-### 3. `yolo_detection.py` - Script de Test
+### 3. `yolo_detection.py` — Test Script
 
-**But :** Script de test simple pour découper une orthophoto et lancer une détection rapide.
+**Purpose:** A simple test script for splitting an orthophoto and running a quick detection.
 
+**What it does:**
 
-**Ce qu'il fait :**
-1. Découper un VRT en tuiles JPEG
-2. Charger un modèle YOLO entraîné
-3. Lancer la prédiction sur toutes les tuiles
-4. Sauvegarder les résultats avec visualisation
-voir 
+1. Splits a VRT into JPEG tiles
+2. Loads a trained YOLO model
+3. Runs prediction on all tiles
+4. Saves the results with visualization
+
+See:
+
 ---
 
-## 🚀 Workflow Complet Recommandé
+## 🚀 Recommended Complete Workflow
 
-### Pour créer un nouveau modèle :
+### To create a new model:
 
-1. **Préparer les annotations dans QGIS**
-   - Charger l'orthophoto
-   - Digitaliser les passages piétons
-   - Exporter en GeoPackage avec champ `classe`
+1. **Prepare the annotations in QGIS**
 
-2. **Construire le dataset**
+   * Load the orthophoto
+   * Digitize the pedestrian crossings
+   * Export as a GeoPackage with a `classe` field
+
+2. **Build the dataset**
+
    ```bash
    python prepa_dataset.py build --ortho pcrs/ --annotations passage.gpkg --out dataset
    ```
 
-3. **Entraîner le modèle**
+3. **Train the model**
+
    ```bash
    python yolo_detection.py train --data dataset/data.yaml --epochs 100 --imgsz 640 --base-model yolov8s.pt
    ```
 
-4. **Tester sur une nouvelle orthophoto**
+4. **Test on a new orthophoto**
+
    ```bash
    python yolo_detection.py infer --ortho nouvelle_ortho.tif --weights runs/detect/train/weights/best.pt --out test.gpkg
    ```
 
-5. **Ouvrir les résultats dans QGIS**
-   - Charger `test.gpkg`
-   - Les couches `passage_pieton` et `mobilier_urbain` apparaissent automatiquement
+5. **Open the results in QGIS**
+
+   * Load `test.gpkg`
+   * The `passage_pieton` and `mobilier_urbain` layers will appear automatically
 
 ---
 
-## 📖 Concepts Clés pour Débutants
+## 📖 Key Concepts for Beginners
 
-### Système de Coordonnées (CRS)
-Les orthophotos sont géoréférencées : chaque pixel correspond à une position réelle sur Terre. Le code EPSG (ex: 2154 pour Lambert-93) définit ce système de coordonnées.
+### Coordinate Reference System (CRS)
+
+Orthophotos are georeferenced: each pixel corresponds to a real-world position on Earth. The EPSG code (e.g. 2154 for Lambert-93) defines this coordinate reference system.
 
 ### GeoPackage (.gpkg)
-Format de fichier SIG qui peut contenir plusieurs couches vectorielles. C'est le format moderne recommandé pour les données géographiques.
+
+A GIS file format that can contain multiple vector layers. It is the modern recommended format for geographic data.
 
 ### VRT (Virtual Raster)
-Fichier texte qui fait référence à plusieurs GeoTIFF comme s'ils n'en formaient qu'un seul. Utile pour traiter des mosaïques d'images sans les fusionner physiquement.
+
+A text file that references several GeoTIFF files as if they formed a single dataset. It is useful for processing image mosaics without physically merging them.
 
 ### Transfer Learning
-Au lieu d'entraîner un modèle from scratch (ce qui demanderait des milliers d'images), on part d'un modèle qui sait déjà reconnaître des formes générales et on l'adapte à nos classes spécifiques. C'est beaucoup plus rapide et nécessite moins de données.
 
-### Augmentation de Données
-Technique pour augmenter artificiellement la taille du dataset en appliquant des transformations (retournement, rotation, etc.) aux images existantes. Cela aide le modèle à généraliser mieux.
+Instead of training a model from scratch (which would require thousands of images), we start with a model that already knows how to recognize general shapes and adapt it to our specific classes. This is much faster and requires less data.
+
+### Data Augmentation
+
+A technique used to artificially increase the size of a dataset by applying transformations (flipping, rotation, etc.) to existing images. This helps the model generalize better.
 
 ### Train vs Validation
-- **Train** : Données utilisées pour enseigner au modèle
-- **Validation** : Données que le modèle n'a jamais vues, utilisées pour vérifier qu'il a bien appris (et pas juste par cœur)
+
+* **Train**: Data used to teach the model
+* **Validation**: Data the model has never seen, used to check whether it has learned correctly rather than simply memorizing the training data
 
 ---
 
-## 🔧 Dépendances Python
+## 🔧 Python Dependencies
 
-Le projet utilise plusieurs bibliothèques Python :
+The project uses several Python libraries:
 
-- **ultralytics** : Bibliothèque YOLOv8
-- **rasterio** : Lecture/écriture de GeoTIFF
-- **geopandas** : Manipulation de données géographiques
-- **shapely** : Opérations géométriques
-- **opencv-python (cv2)** : Traitement d'images
-- **numpy** : Calculs numériques
-- **pytorch** : Framework d'apprentissage profond (installé automatiquement avec ultralytics)
+* **ultralytics**: YOLOv8 library
+* **rasterio**: GeoTIFF reading/writing
+* **geopandas**: Geographic data manipulation
+* **shapely**: Geometric operations
+* **opencv-python (cv2)**: Image processing
+* **numpy**: Numerical calculations
+* **pytorch**: Deep learning framework (automatically installed with ultralytics)
 
-Pour installer :
+To install:
+
 ```bash
 pip install ultralytics rasterio geopandas opencv-python numpy
 ```
 
 ---
 
-## 💡 Conseils pour de Bons Résultats
+## 💡 Tips for Good Results
 
-1. **Qualité des annotations** : Plus les annotations sont précises, meilleur sera le modèle
-2. **Diversité des données** : Variez les orientations, tailles, conditions d'éclairage
-3. **Équilibre des classes** : Ayez approximativement le même nombre d'exemples pour chaque classe
-4. **Taille du dataset** : Au minimum 50-100 images par classe pour des résultats acceptables
-5. **Sur-apprentissage** : Si le modèle est parfait sur train mais mauvais sur val, il a "appris par cœur" → augmentez les données ou réduisez la complexité du modèle
+1. **Annotation quality**: The more accurate the annotations, the better the model
+2. **Data diversity**: Vary orientations, sizes, and lighting conditions
+3. **Class balance**: Have approximately the same number of examples for each class
+4. **Dataset size**: At least 50–100 images per class for acceptable results
+5. **Overfitting**: If the model is perfect on the training set but performs poorly on validation, it has "memorized" the data → increase the amount of data or reduce model complexity
 
 ---
 
 ## 📞 Support
 
-Pour des questions spécifiques sur :
-- **QGIS** : Documentation officielle QGIS
-- **YOLO/Ultralytics** : https://docs.ultralytics.com/
-- **Python/SIG** : Forums GeoPython, StackOverflow
+For specific questions about:
+
+* **QGIS**: Official QGIS documentation
+* **YOLO/Ultralytics**: https://docs.ultralytics.com/
+* **Python/GIS**: GeoPython forums, StackOverflow
 
 ---
 
-*Ce README est conçu pour être compréhensible par des débutants en IA et SIG. N'hésitez pas à poser des questions si certains concepts ne sont pas clairs !*
+*This README is designed to be understandable for beginners in AI and GIS. Feel free to ask questions if some concepts are unclear!*
 
-Ce projet à été fait dans le cadre de la validation de mes études. il répond a la problématique suivante :
+This project was developed as part of the validation of my studies. It addresses the following issue:
 
-De façon à faciliter le travail de mise à jour future des données d’accessibilité, la collectivité souhaite
-étudier la faisabilité de détection de changements sur la base d’orthophotographies 5 cm produites
-régulièrement sur son territoire. En particulier, la détection de passages piétons (nouveaux, supprimés)
-serait pertinente, tout comme la détection de mobilier urbain.
-Il est attendu de votre part une étude des outils / méthodes IA réalisables, avec une estimation du degré
-de confiance et complétude sur les données produites par IA.
+In order to facilitate future updates of accessibility data, the local authority wants to investigate the feasibility of change detection based on 5 cm orthophotographs regularly produced across its territory. In particular, detecting pedestrian crossings (newly created or removed) would be relevant, as would detecting street furniture.
+
+You are expected to conduct a study of feasible AI tools/methods, with an estimation of the confidence level and completeness of the data produced by AI.
+
+## PROJECT HISTORY
+
+An unsuccessful test was carried out using the QGIS Deepness extension. Since the installation was affected by the coexistence of different Python versions used by QGIS and other projects, I decided to develop the scripts myself.
+
+As documentation was available and showed successful results for real-time YOLO detection, I decided to use this tool rather than TensorFlow.
+
+Initially tested with a model trained for embedded pedestrian-crossing detection, the tests produced no positive results. I therefore trained the YOLOv8s model to detect pedestrian crossings in aerial imagery.
+
+As explained above, after defining a sample of 269 areas across three PCRS tiles from Granville (city center, outlying center, and surrounding countryside), the testing phases were then carried out on an orthophoto that had not been used to train the model.
+
+The results were visually convincing but limited by the available hardware. I therefore also trained and tested the YOLO26n model in the same way. It produced equally convincing results but at one-third of the speed.
+
+The scripts were partly written with the assistance of Claude Sonnet 4.6.

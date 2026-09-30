@@ -43,6 +43,8 @@ Pour qu'une IA apprenne à reconnaître des passages piétons, il faut lui montr
 python prepa_dataset.py build --ortho pcrs_tout.vrt --annotations passage.gpkg --out dataset
 ```
 
+voir passage.gpkg pour les zone d'entrainement du model.
+
 **Ce que fait le script :**
 1. **Liste les dalles** : Il accepte un GeoTIFF, un VRT (mosaïque virtuelle) ou un dossier de dalles
 2. **Planifie intelligemment** : Il ne lit que les dalles qui contiennent des annotations (gain de temps !)
@@ -129,18 +131,17 @@ Avec 64 pixels de chevauchement, chaque objet a plus de chances d'être entière
 
 ---
 
-### 3. `test_yolo.py` - Script de Test
+### 3. `yolo_detection.py` - Script de Test
 
 **But :** Script de test simple pour découper une orthophoto et lancer une détection rapide.
 
-**⚠️ Note :** Ce script semble être en développement et contient quelques erreurs (chemins hardcodés, syntaxe). Il est recommandé d'utiliser `yolo_detection.py` à la place.
 
-**Ce qu'il essaie de faire :**
+**Ce qu'il fait :**
 1. Découper un VRT en tuiles JPEG
 2. Charger un modèle YOLO entraîné
 3. Lancer la prédiction sur toutes les tuiles
 4. Sauvegarder les résultats avec visualisation
-
+voir 
 ---
 
 ## 🚀 Workflow Complet Recommandé
@@ -164,11 +165,11 @@ Avec 64 pixels de chevauchement, chaque objet a plus de chances d'être entière
 
 4. **Tester sur une nouvelle orthophoto**
    ```bash
-   python yolo_detection.py infer --ortho nouvelle_ortho.tif --weights runs/detect/train/weights/best.pt --out resultats.gpkg
+   python yolo_detection.py infer --ortho nouvelle_ortho.tif --weights runs/detect/train/weights/best.pt --out test.gpkg
    ```
 
 5. **Ouvrir les résultats dans QGIS**
-   - Charger `resultats.gpkg`
+   - Charger `test.gpkg`
    - Les couches `passage_pieton` et `mobilier_urbain` apparaissent automatiquement
 
 ---

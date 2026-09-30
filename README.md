@@ -238,3 +238,12 @@ Pour des questions spécifiques sur :
 ---
 
 *Ce README est conçu pour être compréhensible par des débutants en IA et SIG. N'hésitez pas à poser des questions si certains concepts ne sont pas clairs !*
+
+Ce projet à été fait dans le cadre de la validation de mes études. il répond a la problématique suivante :
+
+De façon à faciliter le travail de mise à jour future des données d’accessibilité, la collectivité souhaite
+étudier la faisabilité de détection de changements sur la base d’orthophotographies 5 cm produites
+régulièrement sur son territoire. En particulier, la détection de passages piétons (nouveaux, supprimés)
+serait pertinente, tout comme la détection de mobilier urbain.
+Il est attendu de votre part une étude des outils / méthodes IA réalisables, avec une estimation du degré
+de confiance et complétude sur les données produites par IA.
